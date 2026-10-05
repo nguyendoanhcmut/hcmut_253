@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Đồ Tri Thức Kỹ Thuật Xử Lý Nước · HCMUT</title>
+  <style>
+    :root {
+      --bg: #fcfbfa;
+      --card-bg: #ffffff;
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --text-subtle: #78716c;
+      --border: #e7e5e4;
+      --border-focus: #a8a29e;
+      --chip-bg: #f5f5f4;
+      
+      --water-primary: #1b4965;
+      --water-tint: #edf4f8;
+      --waste-primary: #8a3b14;
+      --waste-tint: #faeee7;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+      padding: 24px 32px;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .badge-sub {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    .btn:hover {
+      background: var(--chip-bg);
+      border-color: var(--border-focus);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: #2e2a27;
+      border-color: #2e2a27;
+      color: #ffffff;
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 24px auto;
+      padding: 0 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .intro-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+
+    .guide-card h2 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .guide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .guide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .key-badge {
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .tabs-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: #ffffff;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .course-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      background: var(--chip-bg);
+      color: var(--text);
+    }
+
+    .tab-btn.active.water {
+      background: var(--water-tint);
+      color: var(--water-primary);
+      border-color: rgba(27, 73, 101, 0.2);
+    }
+
+    .tab-btn.active.waste {
+      background: var(--waste-tint);
+      color: var(--waste-primary);
+      border-color: rgba(138, 59, 20, 0.2);
+    }
+
+    .tab-count {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .tab-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .viewer-container {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+      min-height: 600px;
+    }
+
+    .viewer-header {
+      padding: 12px 20px;
+      background: #faf9f7;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .viewer-title {
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #ffffff;
+    }
+
+    .chapter-drawer {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .drawer-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .chapter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ch-tag {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.12s ease;
+    }
+
+    .ch-tag:hover {
+      border-color: var(--border-focus);
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    footer {
+      max-width: 1400px;
+      margin: 40px auto 32px;
+      padding: 20px 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand-section">
+        <span class="badge-sub">Đại học Bách khoa – ĐHQG-HCM · HCMUT-263</span>
+        <h1>Bản Đồ Tri Thức Kỹ Thuật Xử Lý Nước</h1>
+      </div>
+      <div class="header-links">
+        <a id="btnFullscreen" class="btn btn-primary" href="kt_xu_ly_nuoc_cap_branches.html" target="_blank">
+          Mở Toàn Màn Hình ↗
+        </a>
+        <a id="btnMarkdown" class="btn" href="kt_xu_ly_nuoc_cap_branches.md" target="_blank">
+          Tệp Markdown (.md)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro-grid">
+      <div class="card intro-card">
+        <p>
+          Hệ thống lưu trữ hai bản đồ tư duy chuyên sâu cho ngành Kỹ thuật Môi trường. Toàn bộ nội dung lý thuyết, động học phản ứng, tham số thiết kế thực tế và bài tập giải mẫu được hệ thống hóa thành các nhánh liền mạch.
+        </p>
+        <div class="stats-row">
+          <div class="stat-item">
+            <span class="stat-num" id="statChapters">8 Chương</span>
+            <span class="stat-label">Quy mô công nghệ</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="statNodes">6.172</span>
+            <span class="stat-label">Nhánh tri thức</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="statKatex">2.781</span>
+            <span class="stat-label">Công thức KaTeX</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">Cấp 2</span>
+            <span class="stat-label">Thu gọn mặc định</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card guide-card">
+        <h2>Thao Tác Bản Đồ</h2>
+        <ul class="guide-list">
+          <li>
+            <span class="key-badge">Chuột trái</span>
+            <span>Giữ và kéo để dịch chuyển góc nhìn.</span>
+          </li>
+          <li>
+            <span class="key-badge">Cuộn chuột</span>
+            <span>Phóng to hoặc thu nhỏ tỷ lệ.</span>
+          </li>
+          <li>
+            <span class="key-badge">Vòng tròn node</span>
+            <span>Nhấp vào nút để mở rộng hoặc thu gọn nhánh con.</span>
+          </li>
+          <li>
+            <span class="key-badge">Thanh công cụ</span>
+            <span>Dùng nút góc dưới bên phải để căn giữa hoặc phóng toàn trang.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tabs-wrapper">
+      <div class="course-tabs">
+        <button id="tabWater" class="tab-btn active water" onclick="selectCourse('water')">
+          <span>Kỹ thuật Xử lý Nước cấp</span>
+          <span class="tab-count">8 chương</span>
+        </button>
+        <button id="tabWaste" class="tab-btn waste" onclick="selectCourse('waste')">
+          <span>Kỹ thuật Xử lý Nước thải</span>
+          <span class="tab-count">17 chương</span>
+        </button>
+      </div>
+
+      <div class="tab-actions">
+        <span id="currentStatusText" style="font-size: 13px; color: var(--text-subtle);">Đang hiển thị: Nước cấp</span>
+      </div>
+    </div>
+
+    <div class="viewer-container">
+      <div class="viewer-header">
+        <div class="viewer-title">
+          <span class="status-dot"></span>
+          <span id="viewerTitle">Bản đồ tương tác: Kỹ thuật Xử lý Nước cấp (Water Supply Engineering)</span>
+        </div>
+        <div>
+          <span style="color: var(--text-subtle); font-size: 12px;">Chế độ tương tác trực tiếp · Markmap D3</span>
+        </div>
+      </div>
+      <iframe id="mindmapFrame" src="kt_xu_ly_nuoc_cap_branches.html" title="Interactive Mindmap"></iframe>
+    </div>
+
+    <div class="chapter-drawer">
+      <div class="drawer-title" id="drawerTitle">Cấu trúc các chương công nghệ</div>
+      <div class="chapter-tags" id="chapterTags"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Khoa Môi trường và Tài nguyên · Trường Đại học Bách khoa – ĐHQG-HCM</div>
+    <div>Cập nhật: Học kỳ 1, Năm học 2025–2026</div>
+  </footer>
+
+  <script>
+    const data = {
+      water: {
+        title: "Bản đồ tương tác: Kỹ thuật Xử lý Nước cấp (Water Supply Engineering)",
+        html: "kt_xu_ly_nuoc_cap_branches.html",
+        md: "kt_xu_ly_nuoc_cap_branches.md",
+        chapters: "8 Chương",
+        nodes: "6.172",
+        katex: "2.781",
+        label: "Nước cấp",
+        chapterList: [
+          "Chương 1: Giới thiệu & Chất lượng Nước",
+          "Chương 2: Nguồn Nước & Công trình Thu",
+          "Chương 3: Keo tụ và Tạo bông",
+          "Chương 4: Khử Sắt và Mangan",
+          "Chương 5: Quá trình Lắng",
+          "Chương 6: Quá trình Lọc",
+          "Chương 7: Khử trùng Nước cấp",
+          "Chương 8: Xử lý Nâng cao"
+        ]
+      },
+      waste: {
+        title: "Bản đồ tương tác: Kỹ thuật Xử lý Nước thải (Wastewater Engineering)",
+        html: "kt_xu_ly_nuoc_thai_branches.html",
+        md: "kt_xu_ly_nuoc_thai_branches.md",
+        chapters: "17 Chương",
+        nodes: "10.567",
+        katex: "4.764",
+        label: "Nước thải",
+        chapterList: [
+          "Chương 1: Tổng quan Nước thải",
+          "Chương 2: Bể Điều hòa",
+          "Chương 3.1: Song chắn rác & Lưới lọc",
+          "Chương 3.2: Bể Lắng cát",
+          "Chương 3.3: Bể Lắng đợt 1 & đợt 2",
+          "Chương 3.4: Tuyển nổi DAF",
+          "Chương 3.5: Lọc Nước thải",
+          "Chương 4.1: Keo tụ Nước thải",
+          "Chương 4.2: Tạo bông cặn",
+          "Chương 4.3: Khử trùng Nước thải",
+          "Chương 5.1: Vi sinh vật & Tăng trưởng",
+          "Chương 5.2: Chuyển hóa Nitơ",
+          "Chương 6: Xử lý Sinh học Hiếu khí",
+          "Chương 7: Khử Nitơ Sinh học",
+          "Chương 8: Xử lý Sinh học Kỵ khí",
+          "Chương 9: Khử Photpho EBPR",
+          "Chương 10: Xử lý Bùn cặn"
+        ]
+      }
+    };
+
+    function selectCourse(type) {
+      const c = data[type];
+      const frame = document.getElementById("mindmapFrame");
+      const tabWater = document.getElementById("tabWater");
+      const tabWaste = document.getElementById("tabWaste");
+      const viewerTitle = document.getElementById("viewerTitle");
+      const btnFullscreen = document.getElementById("btnFullscreen");
+      const btnMarkdown = document.getElementById("btnMarkdown");
+      const statChapters = document.getElementById("statChapters");
+      const statNodes = document.getElementById("statNodes");
+      const statKatex = document.getElementById("statKatex");
+      const currentStatusText = document.getElementById("currentStatusText");
+      const drawerTitle = document.getElementById("drawerTitle");
+      const chapterTags = document.getElementById("chapterTags");
+
+      frame.src = c.html;
+      viewerTitle.textContent = c.title;
+      btnFullscreen.href = c.html;
+      btnMarkdown.href = c.md;
+      statChapters.textContent = c.chapters;
+      statNodes.textContent = c.nodes;
+      statKatex.textContent = c.katex;
+      currentStatusText.textContent = "Đang hiển thị: " + c.label;
+      drawerTitle.textContent = "Cấu trúc các chương công nghệ (" + c.chapters + ")";
+
+      if (type === 'water') {
+        tabWater.className = "tab-btn active water";
+        tabWaste.className = "tab-btn waste";
+      } else {
+        tabWater.className = "tab-btn water";
+        tabWaste.className = "tab-btn active waste";
+      }
+
+      chapterTags.innerHTML = "";
+      c.chapterList.forEach(item => {
+        const span = document.createElement("span");
+        span.className = "ch-tag";
+        span.textContent = item;
+        chapterTags.appendChild(span);
+      });
+    }
+
+    // Init with water supply
+    selectCourse('water');
+  </script>
+</body>
+</html>
