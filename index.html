@@ -266,6 +266,12 @@
       border-color: rgba(138, 59, 20, 0.2);
     }
 
+    .tab-btn.active.all {
+      background: #f4f1ea;
+      color: #38342f;
+      border-color: rgba(56, 52, 47, 0.25);
+    }
+
     .tab-count {
       font-size: 11px;
       font-weight: 700;
@@ -455,6 +461,10 @@
           <span>Kỹ thuật Xử lý Nước thải</span>
           <span class="tab-count">17 chương</span>
         </button>
+        <button id="tabAll" class="tab-btn all" onclick="selectCourse('all')">
+          <span>Toàn bộ 25 Chương</span>
+          <span class="tab-count">Hợp nhất</span>
+        </button>
       </div>
 
       <div class="tab-actions">
@@ -534,6 +544,42 @@
           "Chương 9: Khử Photpho EBPR",
           "Chương 10: Xử lý Bùn cặn"
         ]
+      },
+      all: {
+        title: "Bản đồ tương tác: Toàn bộ Giáo trình HCMUT-263 (Cả Nước cấp & Nước thải)",
+        html: "hcmut_263_branches.html",
+        md: "hcmut_263_branches.md",
+        chapters: "25 Chương",
+        nodes: "16.674",
+        katex: "7.497",
+        label: "Toàn bộ 25 chương hợp nhất",
+        chapterList: [
+          "[Cấp] Chương 1: Giới thiệu & Chất lượng Nước",
+          "[Cấp] Chương 2: Nguồn Nước & Công trình Thu",
+          "[Cấp] Chương 3: Keo tụ và Tạo bông",
+          "[Cấp] Chương 4: Khử Sắt và Mangan",
+          "[Cấp] Chương 5: Quá trình Lắng",
+          "[Cấp] Chương 6: Quá trình Lọc",
+          "[Cấp] Chương 7: Khử trùng Nước cấp",
+          "[Cấp] Chương 8: Xử lý Nâng cao",
+          "[Thải] Chương 1: Tổng quan Nước thải",
+          "[Thải] Chương 2: Bể Điều hòa",
+          "[Thải] Chương 3.1: Song chắn rác & Lưới lọc",
+          "[Thải] Chương 3.2: Bể Lắng cát",
+          "[Thải] Chương 3.3: Bể Lắng đợt 1 & đợt 2",
+          "[Thải] Chương 3.4: Tuyển nổi DAF",
+          "[Thải] Chương 3.5: Lọc Nước thải",
+          "[Thải] Chương 4.1: Keo tụ Nước thải",
+          "[Thải] Chương 4.2: Tạo bông cặn",
+          "[Thải] Chương 4.3: Khử trùng Nước thải",
+          "[Thải] Chương 5.1: Vi sinh vật & Tăng trưởng",
+          "[Thải] Chương 5.2: Chuyển hóa Nitơ",
+          "[Thải] Chương 6: Xử lý Sinh học Hiếu khí",
+          "[Thải] Chương 7: Khử Nitơ Sinh học",
+          "[Thải] Chương 8: Xử lý Sinh học Kỵ khí",
+          "[Thải] Chương 9: Khử Photpho EBPR",
+          "[Thải] Chương 10: Xử lý Bùn cặn"
+        ]
       }
     };
 
@@ -542,6 +588,7 @@
       const frame = document.getElementById("mindmapFrame");
       const tabWater = document.getElementById("tabWater");
       const tabWaste = document.getElementById("tabWaste");
+      const tabAll = document.getElementById("tabAll");
       const viewerTitle = document.getElementById("viewerTitle");
       const btnFullscreen = document.getElementById("btnFullscreen");
       const btnMarkdown = document.getElementById("btnMarkdown");
@@ -562,13 +609,9 @@
       currentStatusText.textContent = "Đang hiển thị: " + c.label;
       drawerTitle.textContent = "Cấu trúc các chương công nghệ (" + c.chapters + ")";
 
-      if (type === 'water') {
-        tabWater.className = "tab-btn active water";
-        tabWaste.className = "tab-btn waste";
-      } else {
-        tabWater.className = "tab-btn water";
-        tabWaste.className = "tab-btn active waste";
-      }
+      tabWater.className = "tab-btn water" + (type === 'water' ? ' active' : '');
+      tabWaste.className = "tab-btn waste" + (type === 'waste' ? ' active' : '');
+      tabAll.className = "tab-btn all" + (type === 'all' ? ' active' : '');
 
       chapterTags.innerHTML = "";
       c.chapterList.forEach(item => {
@@ -581,6 +624,7 @@
 
     // Init with water supply
     selectCourse('water');
+
   </script>
 </body>
 </html>
